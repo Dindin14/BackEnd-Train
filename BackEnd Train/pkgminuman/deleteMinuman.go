@@ -1,12 +1,19 @@
 package pkgminuman
 
-import "fmt"
+import (
+	"fmt"
+	"gormstudy/db"
+)
 
 var idMinuman string
 
-func KurangMinuman() string {
+func KurangMinuman() {
 	fmt.Println("ID Minuman: ")
 	fmt.Scanln(&idMinuman)
 
-	return idMinuman
+	result := db.DB.Delete(&db.Minuman{}, idMinuman)
+	err := result.Error
+	if err != nil {
+		panic(err.Error())
+	}
 }
