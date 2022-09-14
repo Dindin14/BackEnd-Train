@@ -1,12 +1,19 @@
 package pkgmakanan
 
-import "fmt"
+import (
+	"fmt"
+	"gormstudy/db"
+)
 
 var idDltMakanan string
 
-func KurangMakanan() string {
+func KurangMakanan() {
 	fmt.Println("ID Makanan: ")
 	fmt.Scanln(&idDltMakanan)
 
-	return idDltMakanan
+	result := db.DB.Delete(&db.Makanan{}, idDltMakanan)
+	err := result.Error
+	if err != nil {
+		panic(err.Error())
+	}
 }
